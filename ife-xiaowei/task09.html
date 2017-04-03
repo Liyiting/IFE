@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>任务九：使用HTML/CSS实现一个复杂页面</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            -moz-box-sizing:border-box; /* Firefox */
+            -webkit-box-sizing:border-box;
+        }
+        body {
+            background-color: #000;
+        }
+        .container {
+            width: 1280px;
+            margin: 0 auto;
+        }
+
+        /*header*/
+        header {
+            height: 56px;
+            width: 100%;
+            background-color: #2189bf;
+        }
+        .header-logo {
+            height: 36px;
+            width: 36px;
+            background: url(http://wx2.sinaimg.cn/mw690/698e832dly1fe2s14x4ppg201001002s.gif) no-repeat;
+            float: left;
+            margin-left: 50px;
+            margin-top: 10px;
+        }
+        .header-login {
+            height: 16px;
+            float: right;
+            margin-top: 20px;
+            margin-right: 94px;
+            background-color: #2189bf;
+            border: 0;
+        }
+        .header-login-icon {
+            width: 15px;
+            height: 16px;
+            background: url(http://wx3.sinaimg.cn/mw690/698e832dly1fe2sexbi52g200f00g01z.gif) no-repeat;
+            float: left;
+        }
+        .header-login-text {
+            color: #fff;
+            font: 12px/16px "SimHei";
+            float: left;
+            margin-left: 3px;
+        }
+        .header-search {
+            height: 28px;
+            width: 312px;
+            background-color: #fff;
+            border-radius: 17px;
+            float: right;
+            margin-top: 14px;
+            margin-right: 21px;
+            position: relative;
+        }
+        .header-search-icon {
+            height: 17px;
+            width: 17px;
+            background: url(http://wx2.sinaimg.cn/mw690/698e832dly1fe2t26aci8g200h00h0f5.gif) no-repeat;
+            position: absolute;
+            left: 18px;
+            top: 6px;
+        }
+        .header-search input {
+            float: right;
+            height: 28px;
+            width: 260px;
+            position: relative;
+            right: 13px;
+            border: none;
+            outline: none;
+        }
+
+        /*navigator*/
+        .nav {
+            width: 260px;
+            height: 1210px;
+            background-color: #2a2e3d;
+            float: left;
+            position: relative;
+        }
+        .profile {
+            height: 150px;
+            width: 100%;
+        }
+        .profile-id {
+            height: 94px;
+            width: 100%;
+            position: relative;
+            padding: 18px 0 0 45px;
+        }
+        .photo-frame {
+            height: 58px;
+            width: 58px;
+            display: inline-block;
+            border-radius: 29px;
+            border: 2px solid #b9babe;
+
+        }
+        .photo {
+            height: 46px;
+            width: 46px;
+            border-radius: 23px;
+            background-color: #b9babe;
+            position: relative;
+            top: 4px;
+            left: 4px;
+        }
+        .name {
+            font: 16px "SimHei";
+            color: #f6f5f5;
+            display: inline-block;
+            position: relative;
+            left: 16px;
+            bottom: 20px;
+        }
+        .profile-detail {
+            height: 56px;
+            width: 100%;
+            color: #6e8095;
+            padding-left: 30px;
+        }
+        .collection,
+        .fans {
+            font: 12px "SimSun";
+            display: inline-block;
+            margin: 0 32px;
+            position: relative;
+        }
+        .collection:after {
+            content: "";
+            height: 28px;
+            border-right: 2px solid #383d4e;
+            position: absolute;
+            bottom: 0;
+            left: 57px;
+        }
+
+        #collection-number,
+        #fans-number {
+            font: 16px "SimHei";
+        }
+        .nav-menu {
+            height: 240px;
+            width: 100%;
+        }
+        .reports {
+            height: 190px;
+            width: 100%;
+            background-color: #383d4e;
+            padding-left: 45px;
+            padding-top: 14px;
+        }
+        .info {
+            padding-top: 16px;
+            padding-left: 45px;
+        }
+        .nav-menu span {
+            display: inline-block;
+        }
+        .nav-menu ul {
+            list-style-type: none;
+        }
+        .nav-menu {
+            color: #6e8095;
+            font: 12px "SimHei";
+        }
+        .report,
+        .folder2,
+        .file1 {
+            color: #fff;
+        }
+        .icon-report{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx2.sinaimg.cn/mw690/698e832dly1fe6e8gv1tsg200c00c08h.gif) no-repeat;
+        }
+        .icon-folder1{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx1.sinaimg.cn/mw690/698e832dly1fe6e8g1dfng200c00c08e.gif) no-repeat;
+
+        }
+        .icon-folder2{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx1.sinaimg.cn/mw690/698e832dly1fe6e8gfr8dg200c00c05i.gif) no-repeat;
+
+        }
+        .icon-file1{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx4.sinaimg.cn/mw690/698e832dly1fe6e8fh9kjg200c00c08n.gif) no-repeat;
+        }
+        .icon-file2{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx4.sinaimg.cn/mw690/698e832dly1fe6e8ersr9g200c00c094.gif) no-repeat;
+        }
+        .icon-arrow2 {
+            display: inline-block;
+            height:12px;
+            width: 12px;
+            background:  url(http://wx1.sinaimg.cn/mw690/698e832dly1fe768pmgbxg200c00c05b.gif) no-repeat;
+        }
+        .icon-arrow1 {
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background:  url(http://wx2.sinaimg.cn/mw690/698e832dly1fe768p54plg200c00c050.gif) no-repeat;
+        }
+        .icon-star{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx1.sinaimg.cn/mw690/698e832dly1fe6fi7lshyg200c00c08j.gif) no-repeat;
+        }
+        .icon-share{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx3.sinaimg.cn/mw690/698e832dly1fe6fi79wlag200c00c08s.gif) no-repeat;
+        }
+        .icon-account{
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            background: url(http://wx3.sinaimg.cn/mw690/698e832dly1fe6fi6ko37g200c00c08h.gif) no-repeat;
+        }
+        .folders {
+            margin-left: 24px;
+            margin-top: 16px;
+        }
+        .files {
+            margin-left: 34px;
+        }
+        .folders li {
+            margin-top: 16px;
+        }
+        .info li {
+            margin-bottom: 18px;
+        }
+
+
+
+
+        /*main*/
+        .main {
+            width: 1020px;
+            height: 1210px;
+            background-color: #ededec;
+            float: right;
+        }
+        .main-nav {
+            height: 30px;
+            width: 100%;
+            background-color: #fff;
+            color: #aaa;
+            font: 12px/30px "SimHei";
+            padding-left: 28px;
+        }
+        .main-nav span {
+            color: #2189bf;
+        }
+        .part1 {
+            margin-left: 59px;
+            margin-top: 19px;
+            background-color: #fff;
+            width: 891px;
+            height: 87px;
+            border: 1px solid #e5e6e6;
+            border-bottom: 2px;
+            color: #aaa;
+            font: 12px "SimHei";
+            padding-top: 15px;
+            padding-left: 22px;
+        }
+        .part1 select {
+            appearance:none;
+            -moz-appearance:none;
+            -webkit-appearance:none;
+            font: 12px "SimHei";
+            color: #323333;
+            border-radius: 0px;
+            margin-left: 12px;
+        }
+        .part1 div {
+            display: inline-block;
+        }
+        .part1-search {
+            float: left;
+        }
+        .part1-search select{
+            height: 25px;
+            width: 70px;
+            border: 1px solid #aaa;
+            padding-left: 10px;
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7b330nq3g20ad00z096.gif) no-repeat;
+            background-position: 51px 9px;
+        }
+        .part1-people {
+            padding-left: 34px;
+        }
+        .part1-people select {
+            width: 120px;
+            height: 26px;
+            background-color: #fff;
+            padding-left: 6px;
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7b330nq3g20ad00z096.gif) no-repeat;
+            background-position: -264px -20px;
+        }
+        .part1-buyer {
+            margin-bottom: 4px;
+        }
+        .part1-change {
+            height: 38px;
+            width: 28px;
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7bxsk61ij200s0120na.jpg) no-repeat;
+            position: relative;
+            left: -12px;
+
+        }
+        .part1-change span {
+            display: block;
+            position: absolute;
+            left: 14px;
+            top: 12px;
+            color: #fff;
+
+        }
+        .part1-detail {
+            margin-left: 10px;
+        }
+        .part1-date {
+            margin-bottom: 4px;
+        }
+        .part1-date select{
+            width: 121px;
+            height: 26px;
+            background-color: #fff;
+            padding-left: 7px;
+        }
+        .part1-days {
+            margin-left:12px;
+            margin-bottom: 4px;
+        }
+        .part1-days select {
+            width: 70px;
+            height: 26px;
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7b330nq3g20ad00z096.gif) no-repeat;
+            background-position: -314px -20px;
+            padding-left: 8px;
+            margin-left: 5px;
+        }
+        .part1-number select {
+            height: 26px;
+            width: 71px;
+            padding-left: 8px;
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7b330nq3g20ad00z096.gif) no-repeat;
+            background-position: -312px -20px;
+        }
+        .part1-items {
+            margin-left: 10px;
+        }
+        .part1-items select {
+            width: 121px;
+            height: 26px;
+            padding-left: 8px;
+            margin-left: 6px;
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7b330nq3g20ad00z096.gif) no-repeat;
+            background-position: -262px -20px;
+        }
+        .part1-button {
+            height: 25px;
+            width: 51px;
+            background-color: #388ac1;
+            color: #fff;
+            font: 12px/25px "SimHei";
+            position: relative;
+            left: 18px;
+            bottom: 16px;
+            text-align: center;
+            border-radius: 2px;
+        }
+
+        /*part2*/
+        .part2 {
+            width: 891px;
+            height: 65px;
+            margin-left: 59px;
+            margin-top: 8px;
+        }
+        .part2-arrowl,
+        .part2-arrowr {
+            height: 100%;
+            width: 31px;
+            background-color: #fff;
+            border: 1px solid;
+            border-color: #dadcde #e5e6e6 #e5e6e6 #dadcde;
+            display: inline-block;
+        }
+        .part2-10am,
+        .part2-11am,
+        .part2-12am,
+        .part2-1pm,
+        .part2-2pm,
+        .part2-3pm {
+            width: 111px;
+            height: 100%;
+            background-color: #fff;
+            border: 1px solid;
+            border-color: #dadcde #e5e6e6 #e5e6e6 #dadcde;
+            display: inline-block;
+            position: relative;
+            vertical-align: top;
+            text-align: center;
+        }
+        .part2-history {
+            width: 130px;
+            height: 100%;
+            background-color: #fff;
+            border: 1px solid;
+            border-color: #dadcde #e5e6e6 #e5e6e6 #dadcde;
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 16px;
+            padding-left: 18px;
+        }
+        .part2-arrowl {
+            background: url(http://wx4.sinaimg.cn/large/698e832dly1fe7mn6ycrjg200t01r05x.gif) no-repeat;
+        }
+        .part2-arrowr {
+            background: url(http://wx3.sinaimg.cn/large/698e832dly1fe7mn7g304g200t01r062.gif) no-repeat;
+        }
+        .part2-selected {
+            height: 3px;
+            width: 100%;
+            background-color: #4388c9;
+            position: absolute;
+        }
+        .part2-time {
+            font: 12px "Microsoft Yahei";
+            color: #323333;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .part2-price-tag {
+            display: inline-block;
+            width: 11px;
+            height: 12px;
+            background: url(http://wx1.sinaimg.cn/mw690/698e832dly1fe7n115j3og200b00c08h.gif) no-repeat;
+            position: relative;
+            left: 4px;
+        }
+        .part2-price {
+            font: 21px "Microsoft Yahei";
+            color: #ec6500;
+        }
+        .part2-calender {
+            height: 32px;
+            width: 32px;
+            background: url(http://wx2.sinaimg.cn/large/698e832dly1fe7naz1uwrg200w00w0f9.gif) no-repeat;
+            display: inline-block;
+        }
+        .part2-history span {
+            font: 12px "Microsoft Yahei";
+            color: #535353;
+            display: inline-block;
+            position: relative;
+            top: -10px;
+            left: 11px;
+        }
+
+        /*part3*/
+        .part3 {
+            height: 72px;
+            width: 891px;
+            margin-left: 59px;
+            margin-top: 38px;
+            position: relative;
+        }
+        .part3-title {
+            font: 12px "Microsoft Yahei";
+            color: #323333;
+            position: absolute;
+            top: -21px;
+        }
+        .part3-green,
+        .part3-blue,
+        .part3-red,
+        .part3-yellow {
+            width: 202px;
+            height: 72px;
+            background-color: #fff;
+            display: inline-block;
+            margin-right: 23px;
+            border: 1px solid #d8d9db;
+            vertical-align: top;
+            position: relative;
+
+        }
+        .part3-yellow {
+            margin-right: 0;
+        }
+        .part3-label{
+            height: 100%;
+            width: 3px;
+            float: left;
+        }
+        .part3-text {
+            display: inline-block;
+            margin-left: 10px;
+            margin-top: 17px;
+        }
+        .part3-text div {
+            font: 10px "SimHei";
+            color: #aaa;
+            margin-top: 12px;
+        }
+        .part3-number {
+            font: 12px "SimHei";
+            color: #323333;
+        }
+        .part3-block {
+            height: 47px;
+            width: 61px;
+            float: right;
+            position: relative;
+            top: 11px;
+            right: 14px;
+        }
+        .part3-shadowr {
+            height: 70px;
+            width: 1px;
+            background-color: #f0f1f2;
+            position: absolute;
+            right:0;
+            top: 0;
+        }
+        .part3-shadowd {
+            width: 197px;
+            height: 1px;
+            background-color: #f0f1f2;
+            position: absolute;
+            left: 3px;
+            bottom: 0;
+        }
+        .green-label,
+        .green-block {
+            background-color: #43b29e;
+        }
+        .blue-label,
+        .blue-block {
+            background-color: #388bc2;
+        }
+        .red-label,
+        .red-block {
+            background-color: #d04a36;
+        }
+        .yellow-label,
+        .yellow-block {
+            background-color: #e2cd47;
+        }
+
+        /*part4*/
+        .part4 {
+            height: 357px;
+            width: 531px;
+            border: 1px solid #d8d9db;
+            border-radius: 5px;
+            margin-left: 59px;
+            margin-top: 13px;
+            float: left;
+            background-color: #fff;
+            position: relative;
+        }
+        .part4-head {
+            height: 40px;
+            width: 100%;
+            background-color: #f4f5f6;
+            border-bottom: 1px solid #e7e8eb;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font: 12px/40px "SimHei";
+            color: #aaa;
+            padding-left: 19px;
+        }
+        .part4-tabtags {
+            height: 279px;
+            width: 490px;
+            background-color: #fff;
+            margin-left: 20px;
+            margin-top: 12px;
+            border-radius: 3px;
+            position: relative;
+        }
+        .part4-tabtags .tab-radio{
+            display: none;
+        }
+        .tab-handler{
+          position: relative;
+          z-index: 2;
+          display: block;
+          float: left;
+          height: 27px;
+          width: 84px;
+          color: #535353;
+          font: 12px/27px "Microsoft Yahei";
+          text-align: center;
+          background-color: #ececef;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          border-bottom: 1px solid #cacbcb;
+          margin-right: 3px;
+        }
+        .tab-radio:checked + .tab-handler{
+          background-color: #fff;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px;
+          border: 1px solid #aaa;
+          border-color: #cacbcb #cacbcb #fff #cacbcb;
+        }
+        .tab-radio:checked + .tab-handler + .tab-content{
+          visibility: visible;
+          opacity: 1;
+        }
+        .part4-tabtags .tab-content{
+          visibility: hidden;
+          position: absolute;
+          top: 26px;
+          left: 0;
+          width: 490px;
+          height: 252px;
+          color: #999;
+          font-size: 14px;
+          line-height: 1.618em;
+          background-color: #fff;
+          border: 1px solid #cacbcb;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          border-bottom-left-radius: 5px;
+          opacity: 0;
+        }
+        .part4 table{
+            border-collapse: collapse;
+            margin: 0 auto;
+            margin-top: 28px;
+        }
+        .part4 table td {
+            height: 30px;
+            width: 101px;
+            border: 1px solid #e1e2e2;
+            font: 12px/30px "SimSun";
+            text-align: center;
+            color: #999dae;
+        }
+        .part4 table td:nth-child(1) {
+            color: #535353;
+        }
+        .part4-selected {
+            color: #999dae;
+            background-color: #f3f5f6;
+        }
+
+        /*part5*/
+        .part5 {
+            height: 357px;
+            width: 351px;
+            border: 1px solid #d8d9db;
+            border-radius: 5px;
+            margin-top: 13px;
+            margin-left: 7px;
+            float: left;
+            background-color: #fff;
+            position: relative;
+        }
+        .part5-head {
+            height: 40px;
+            width: 100%;
+            background-color: #f4f5f6;
+            border-bottom: 1px solid #e7e8eb;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font: 12px/40px "SimHei";
+            color: #aaa;
+            padding-left: 19px;
+        }
+        .part5-table {
+            height: 317px;
+            width: 100%;
+            padding: 14px 35px 37px 34px;
+        }
+        .part5-title {
+            font: 12px/24px "Microsoft Yahei";
+            color: #c3c2c2;
+            margin-left:12px;
+        }
+        .part5-content {
+            font: 12px "Microsoft Yahei";
+            color: #535353;
+            display: block;
+            margin-bottom:8px;
+            margin-left: 12px;
+        }
+        .part5 table {
+            border-collapse: collapse;
+        }
+        .part5 table td:nth-child(1) {
+            width: 95px;
+            height: 45px;
+            border-right: 1px solid #ddd;
+        }
+        .part5 table td:nth-child(2) {
+            width: 185px;
+        }
+        .part5 table tr {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .part5-check {
+            height: 31px;
+            width: 280px;
+            position: absolute;
+            bottom: 30px;
+            border-top: 1px solid #ddd;
+            padding-top: 6px;
+        }
+        .part5-check input {
+            position: relative;
+            left: 3px;
+        }
+        .part5-check label {
+            font: 12px "Microsoft Yahei";
+            color: #c3c2c2;
+            margin-left: 24px;
+        }
+        .part5-button {
+            height: 25px;
+            width: 51px;
+            border-radius: 2px;
+            background-color: #388ac1;
+            font: 12px/25px "SimHei";
+            color: #fff;
+            text-align: center;
+            float: right;
+        }
+        .part5-checkbox{
+            display: none;
+        }
+
+        .part5-checkbox:checked +label:after {
+            content: '\221a'; //勾选符号
+            display: block;
+            width: 13px;
+            height: 13px;
+            position: absolute;
+            top: 9px;
+            left: 2px;
+            color: #758794;
+            background-color: #d6d6d6;
+            text-align: center;
+            vertical-align: text-top;
+        }
+
+
+        /*part6*/
+        .part6 {
+            height: 357px;
+            width: 351px;
+            border: 1px solid #d8d9db;
+            border-radius: 5px;
+            margin-top: 6px;
+            margin-left: 59px;
+            float: left;
+            background-color: #fff;
+        }
+        .part6-head {
+            height: 40px;
+            width: 100%;
+            background-color: #f4f5f6;
+            border-bottom: 1px solid #e7e8eb;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font: 12px/40px "SimHei";
+            color: #aaa;
+            padding-left: 19px;
+        }
+        .part6-select {
+            margin-top: 10px;
+            margin-left: 24px;
+        }
+        .part6-year,
+        .part6-month,
+        .part6-date,
+        .part6-button {
+            height: 22px;
+            border: 1px solid #cdcecf;
+            display: inline-block;
+            position: relative;
+        }
+        .part6 select {
+            border: none;
+            appearance:none;
+            -moz-appearance:none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            font: 12px/20px "SimHei";
+            color: #535353;
+        }
+        .part6-year {
+            width: 64px;
+            background: url(http://wx4.sinaimg.cn/mw690/698e832dly1fe9iqu8rk6g200700502v.gif) no-repeat;
+            background-position: 49px 8px;
+        }
+        .part6-year select {
+            width: 60px;
+            padding-left: 4px;
+        }
+        .part6-month {
+            width: 85px;
+            background: url(http://wx4.sinaimg.cn/mw690/698e832dly1fe9iqu8rk6g200700502v.gif) no-repeat;
+            background-position: 70px 8px;
+        }
+        .part6-month select {
+            width: 47px;
+            padding-left: 6px;
+        }
+        .part6-arrow1 {
+            width: 18px;
+            height: 20px;
+            float: left;
+        }
+        .part6-arrow2 {
+            width: 18px;
+            height: 20px;
+            float: right;
+        }
+        .part6-date {
+            width: 75px;
+            background: url(http://wx4.sinaimg.cn/mw690/698e832dly1fe9iqu8rk6g200700502v.gif) no-repeat;
+            background-position: 60px 8px;
+        }
+        .part6-date select{
+            width: 73px;
+            padding-left: 4px;
+        }
+        .part6-button {
+            width: 66px;
+            font: 12px/20px "SimHei";
+            color: #535353;
+            text-align: center;
+        }
+        .part6-year:after,
+        .part6-month:after,
+        .part6-date:after {
+            content: "";
+            height: 20px;
+            border-right: 1px solid #f5f6f7;
+            position: absolute;
+            top: 0;
+            right: 18px;
+        }
+        .part6-calender {
+            width: 309px;
+            margin: 0 auto;
+            margin-top: 10px;
+            border-top: 1px solid #a9cfec;
+        }
+        .part6 table {
+            border-collapse: 2px;
+            margin: 0 auto;
+            font: 12px "SimHei";
+            color: #535353;
+            text-align: center;
+            position: relative;
+        }
+        .part6 table td {
+            height: 41px;
+            width: 41px;
+        }
+        .part6 table .holiday {
+            color: #c9161d;
+        }
+        .part6 td:nth-child(6) span:nth-child(1),
+        .part6 td:nth-child(7) span:nth-child(1) {
+            color: #c9161d;
+        }
+        .part6 table:before{
+            content: "";
+            width: 309px;
+            border-bottom: 1px solid #e1e2e2;
+            position: absolute;
+            left: -3px;
+            top: 30px;
+        }
+        .part6 table tr:nth-child(1) td {
+            height: 30px;
+            position: relative;
+            bottom: 3px;
+        }
+        .selected-date {
+            border: 1px solid #f5c52a;
+        }
+
+        /*part7*/
+        .part7 {
+            height: 357px;
+            width: 531px;
+            border: 1px solid #d8d9db;
+            border-radius: 5px;
+            margin-left: 7px;
+            margin-top: 6px;
+            float: left;
+            background-color: #fff;
+        }
+        .part7-head {
+            height: 40px;
+            width: 100%;
+            background-color: #f4f5f6;
+            border-bottom: 1px solid #e7e8eb;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font: 12px/40px "SimHei";
+            color: #aaa;
+            padding-left: 19px;
+        }
+        .part7-chart {
+            position: relative;
+            left: 40px;
+            top: 18px;
+        }
+        .part7-chart table{
+            border-collapse: collapse;
+        }
+        .part7-chart table th{
+            border: 1px solid #cbcbcb;
+            font: 13px "SimHei";
+            color: #231815;
+        }
+        .part7-chart table td{
+            border: 1px solid #cbcbcb;
+            font: 12px/24px "SimHei";
+            color: #323333;
+            text-align: center;
+        }
+        .part7-chart table td:nth-child(1) {
+            width: 68px;
+            height: 26px;
+        }
+        .part7-chart table td:nth-child(2) {
+            width: 92px;
+            height: 26px;
+        }
+        .part7-chart table td:nth-child(3) {
+            width: 292px;
+            height: 26px;
+        }
+        .part7-chart table th {
+            height: 28px;
+        }
+        .part7-chart table th:nth-child(3){
+            text-align: left;
+            position: relative;
+            left: 28px;
+        }
+        .part7 table tr:nth-child(11) td{
+            border-bottom: none
+        }
+        .part7-number {
+            height: 25px;
+            width: 104px;
+            text-align: left;
+            display: inline-block;
+            position: relative;
+            left: -7px;
+            padding-left: 33px;
+        }
+        .part7-bars {
+            width: 168px;
+            height: 4px;
+            background-color: #dddcdd;
+            display: inline-block;
+            position: relative;
+            left: -4px;
+            top: -1px;
+        }
+        .color-bar {
+            height: 4px;
+            position: absolute;
+            left: 0;
+        }
+        .bar-1 {
+            width: 140px;
+            background-color: #ec6e51;
+        }
+        .bar-2 {
+            width: 121px;
+            background-color: #ef804f;
+        }
+        .bar-3 {
+            width: 104px;
+            background-color: #f19f4f;
+        }
+        .bar-4 {
+            width: 96px;
+            background-color: #7fcbf0;
+        }
+        .bar-5 {
+            width: 86px;
+            background-color: #7ecaf0;
+        }
+        .bar-6 {
+            width: 79px;
+            background-color: #7ecaf0;
+        }
+        .bar-7 {
+            width: 74px;
+            background-color: #7ecaf0;
+        }
+        .bar-8 {
+            width: 63px;
+            background-color: #7ecaf0;
+        }
+        .bar-9 {
+            width: 59px;
+            background-color: #7ecaf0;
+        }
+        .bar-10 {
+            width: 54px;
+            background-color: #7ecaf0;
+        }
+        .part7-selected td {
+            background-color: #f4f5f6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-logo"></div>
+        <button class="header-login">
+            <div class="header-login-icon"></div>
+            <div class="header-login-text">登录</div>
+        </button>
+        <div class="header-search">
+            <div class="header-search-icon"></div>
+            <input type="text"/>
+        </div>
+    </header>
+    <div class="nav">
+        <div class="profile">
+            <div class="profile-id">
+                <div class="photo-frame"><div class="photo"></div></div>
+                <div class="name">ABC123</div>
+            </div>
+            <div class="profile-detail">
+                <div class="collection"><span id="collection-number">110</span><br/>收藏</div>
+                <div class="fans"><span id="fans-number">313</span><br/>粉丝</div>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <div class="reports">
+                <i class="icon-report"></i>
+                <span class="report">个人报表</span>
+                <div class="folders">
+                    <ul>
+                        <li>
+                            <i class="icon-arrow-r"></i>
+                            <span>
+                                <i class="icon-folder1"></i>
+                                <span>文件一</span>
+                            </span>
+                        </li>
+                        <li>
+                        <i class="icon-arrow2"></i>
+                            <span>
+                                <i class="icon-folder2"></i>
+                                    <span class="folder2">文件二</span>
+                            </span>
+                            <div class="files">
+                                <ul>
+                                    <li>
+                                        <i class="icon-file2"></i>
+                                        <span class="file1">文档1</span>
+                                    </li>
+                                    <li>
+                                        <i class="icon-file1"></i>
+                                        <span>文档1</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="icon-arrow1"></i>
+                            <span>
+                                <i class="icon-folder1"></i>
+                                    <span>文件三</span>
+                        </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="info">
+                <ul>
+                    <li>
+                        <i class="icon-star"></i>
+                        <span>个人收藏</span>
+                    </li>
+                    <li>
+                        <i class="icon-share"></i>
+                        <span>我的分享</span>
+                    </li>
+                    <li>
+                        <i class="icon-star"></i>
+                        <span>图库</span>
+                    </li>
+                    <li>
+                        <i class="icon-star"></i>
+                        <span>成长记录</span>
+                    </li>
+                    <li>
+                        <i class="icon-account"></i>
+                        <span>账户信息</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-nav">
+            <div>
+                c站&nbsp;&nbsp;/&nbsp;个人报表&nbsp;/&nbsp;文件一&nbsp;/<span>&nbsp;文档一</span>
+                </div>
+        </div>
+        <div class="part1">
+            <div class="part1-search">
+                <span>查询项</span>
+                <select><option>第一项</option></select>
+            </div>
+            <div class="part1-people">
+                <div class="part1-buyer">
+                    <span>买方</span>
+                    <select><option>小A</option></select>
+                </div>
+                <br />
+                <div class="part1-seller">
+                    <span>卖方</span>
+                    <select><option>小C</option></select>
+                </div>
+            </div>
+            <div class="part1-change">
+                <span>换</span>
+            </div>
+            <div class="part1-detail">
+                <div class="part1-date">
+                    <span>日期</span>
+                    <select><option>2016-04-01</option></select>
+                </div>
+                <div class="part1-days">
+                    <span>总耗时</span>
+                    <select><option>8天</option></select>
+                </div>
+                <br />
+                <div class="part1-number">
+                    <span>人数</span>
+                    <select><option>10人</option></select>
+                </div>
+                <div class="part1-items">
+                    <span>成交项</span>
+                    <select><option>10项</option></select>
+                </div>
+            </div>
+            <div class="part1-button">搜索</div>
+        </div>
+        <div class="part2">
+            <div class="part2-arrowl"></div>
+            <div class="part2-10am">
+                <div class="part2-selected"></div>
+                <span class="part2-time">10:00 am</span>
+                <br />
+                <i class="part2-price-tag"></i>
+                <span class="part2-price">1200</span>
+            </div>
+            <div class="part2-11am">
+                <span class="part2-time">11:00 am</span>
+                <br />
+                <i class="part2-price-tag"></i>
+                <span class="part2-price">1300</span>
+            </div>
+            <div class="part2-12am">
+                <span class="part2-time">12:00 am</span>
+                <br />
+                <i class="part2-price-tag"></i>
+                <span class="part2-price">1200</span>
+            </div>
+            <div class="part2-1pm">
+                <span class="part2-time">01:00 pm</span>
+                <br />
+                <i class="part2-price-tag"></i>
+                <span class="part2-price">1400</span>
+            </div>
+            <div class="part2-2pm">
+                <span class="part2-time">02:00 pm</span>
+                <br />
+                <i class="part2-price-tag"></i>
+                <span class="part2-price">1500</span>
+            </div>
+            <div class="part2-3pm">
+                <span class="part2-time">03:00 pm</span>
+                <br />
+                <i class="part2-price-tag"></i>
+                <span class="part2-price">1800</span>
+            </div>
+            <div class="part2-arrowr"></div>
+            <div class="part2-history">
+                <div class="part2-calender"></div>
+                <span>历史查询</span>
+            </div>
+        </div>
+        <div class="part3">
+            <div class="part3-title">2016年4月份统计</div>
+            <div class="part3-green">
+                <div class="part3-label green-label"></div>
+                <div class="part3-text">
+                    <span class="part3-number">13311</span>
+                    <div>成交量</div>
+                </div>
+                <div class="part3-block green-block"></div>
+                <div class="part3-shadow">
+                    <div class="part3-shadowr"></div>
+                    <div class="part3-shadowd"></div>
+                </div>
+            </div>
+            <div class="part3-blue">
+                <div class="part3-label blue-label"></div>
+                <div class="part3-text">
+                    <span class="part3-number">13311</span>
+                    <div>成交量</div>
+                </div>
+                <div class="part3-block blue-block"></div>
+                <div class="part3-shadow">
+                    <div class="part3-shadowr"></div>
+                    <div class="part3-shadowd"></div>
+                </div>
+            </div>
+            <div class="part3-red">
+                <div class="part3-label red-label"></div>
+                <div class="part3-text">
+                    <span class="part3-number">13311</span>
+                    <div>成交量</div>
+                </div>
+                <div class="part3-block red-block"></div>
+                <div class="part3-shadow">
+                    <div class="part3-shadowr"></div>
+                    <div class="part3-shadowd"></div>
+                </div>
+            </div>
+            <div class="part3-yellow">
+                <div class="part3-label yellow-label"></div>
+                <div class="part3-text">
+                    <span class="part3-number">13311</span>
+                    <div>成交量</div>
+                </div>
+                <div class="part3-block yellow-block"></div>
+                <div class="part3-shadow">
+                    <div class="part3-shadowr"></div>
+                    <div class="part3-shadowd"></div>
+                </div>
+            </div>
+        </div>
+        <div class="part4">
+            <div class="part4-head">第一组项目</div>
+            <div class="part4-tabtags">
+                <input type="radio" name="tab-radio" class="tab-radio" id="tab-radio-1" checked>
+                <label for="tab-radio-1" class="tab-handler tab-handler-1">项目一</label>
+                <div class="tab-content tab-content-1">
+                    <table>
+                        <tr>
+                            <td class="part4-selected">购买原材料一</td>
+                            <td>购买原材料一</td>
+                            <td>购买原材料一</td>
+                            <td>购买原材料一</td>
+                        </tr>
+                        <tr>
+                            <td>购买原材料二</td>
+                            <td>购买原材料二</td>
+                            <td>购买原材料二</td>
+                            <td>购买原材料二</td>
+                        </tr>
+                        <tr>
+                            <td>购买原材料四</td>
+                            <td>购买原材料四</td>
+                            <td>购买原材料四</td>
+                            <td>购买原材料四</td>
+                        </tr>
+                        <tr>
+                            <td>购买原材料六</td>
+                            <td>购买原材料六</td>
+                            <td>购买原材料六</td>
+                            <td>购买原材料六</td>
+                        </tr>
+                        <tr>
+                            <td>购买原材料十三</td>
+                            <td>购买原材料十三</td>
+                            <td>购买原材料十三</td>
+                            <td>购买原材料十三</td>
+                        </tr>
+                        <tr>
+                            <td>购买原材料二十</td>
+                            <td>购买原材料二十</td>
+                            <td>购买原材料二十</td>
+                            <td>购买原材料二十</td>
+                        </tr>
+                    </table>
+                </div>
+                <!--tab section 2-->
+                <input type="radio" name="tab-radio" class="tab-radio" id="tab-radio-2">
+                <label for="tab-radio-2" class="tab-handler tab-handler-2">项目二</label>
+                <div class="tab-content tab-content-2">列表二</div>
+                <!--tab section 3-->
+                <input type="radio" name="tab-radio" class="tab-radio" id="tab-radio-3">
+                <label for="tab-radio-3" class="tab-handler tab-handler-3">项目三</label>
+                <div class="tab-content tab-content-3">列表三</div>
+                <!--tab section 4-->
+                <input type="radio" name="tab-radio" class="tab-radio" id="tab-radio-4">
+                <label for="tab-radio-4" class="tab-handler tab-handler-4">项目四</label>
+                <div class="tab-content tab-content-4">列表四</div>
+                <!--tab section 5-->
+                <input type="radio" name="tab-radio" class="tab-radio" id="tab-radio-5">
+                <label for="tab-radio-5" class="tab-handler tab-handler-5">项目五</label>
+                <div class="tab-content tab-content-5">列表五</div>
+            </div>
+        </div>
+        <div class="part5">
+            <div class="part5-head">第一组项目</div>
+                <div class="part5-table">
+                <span class="part5-title">标题</span><br/>
+                <span class="part5-content">项目报表三</span>
+                <table>
+                    <tr>
+                        <td>
+                            <span class="part5-title">价格</span><br/>
+                            <span class="part5-content">¥158</span>
+                        </td>
+                        <td>
+                            <span class="part5-title">负责人</span><br/>
+                            <span class="part5-content">小A</span>
+                        </td>
+                    </tr>
+                </table>
+                <span class="part5-title">详细描述</span><br/>
+                <span class="part5-content">该项目目前负责人是......</span>
+                <div class="part5-check">
+                    <input type="checkbox" class="part5-checkbox" id="checkbox" checked>
+                    <label for="checkbox">遵守保密协议</label>
+                    <div class="part5-button">搜索</div>
+                </div>
+            </div>
+        </div>
+        <div class="part6">
+            <div class="part6-head">日历</div>
+            <div class="part6-select">
+                <div class="part6-year">
+                    <select>
+                        <option value="2016年">2016年</option>
+                    </select>
+                </div>
+                <div class="part6-month">
+                    <div class="part6-arrow1"></div>
+                    <select>
+                        <option value="4月">4月</option>
+                    </select>
+                    <div class="part6-arrow2"></div>
+                </div>
+                <div class="part6-date">
+                    <select>
+                        <option value="日期">标注日期</option>
+                    </select>
+                </div>
+                <div class="part6-button">返回今天</div>
+            </div>
+            <div class="part6-calender">
+                <table>
+                    <tr>
+                        <td>一</td>
+                        <td>二</td>
+                        <td>三</td>
+                        <td>四</td>
+                        <td>五</td>
+                        <td>六</td>
+                        <td>日</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <span>1</span><br />
+                            <span class="holiday">愚人节</span>
+                        </td>
+                        <td>
+                            <span>2</span><br />
+                            <span>廿五</span>
+                        </td>
+                        <td>
+                            <span>3</span><br />
+                            <span>廿六</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>4</span><br />
+                            <span>廿七</span>
+                        </td>
+                        <td>
+                            <span>5</span><br />
+                            <span class="holiday">清明</span>
+                        </td>
+                        <td>
+                            <span>6</span><br />
+                            <span>廿九</span>
+                        </td>
+                        <td>
+                            <span>7</span><br />
+                            <span>三月</span>
+                        </td>
+                        <td>
+                            <span>8</span><br />
+                            <span>初二</span>
+                        </td>
+                        <td class="selected-date">
+                            <span>9</span><br />
+                            <span>初三</span>
+                        </td>
+                        <td>
+                            <span>10</span>
+                            <span>初四</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>11</span><br />
+                            <span>初五</span>
+                        </td>
+                        <td class="selected-date">
+                            <span>12</span><br />
+                            <span>初六</span>
+                        </td>
+                        <td>
+                            <span>13</span><br />
+                            <span>初七</span>
+                        </td>
+                        <td>
+                            <span>14</span><br />
+                            <span>初八</span>
+                        </td>
+                        <td>
+                            <span>15</span><br />
+                            <span>初九</span>
+                        </td>
+                        <td>
+                            <span>16</span><br />
+                            <span>初十</span>
+                        </td>
+                        <td>
+                            <span>17</span>
+                            <span>十一</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>18</span><br />
+                            <span>十二</span>
+                        </td>
+                        <td class="selected-date">
+                            <span>19</span><br />
+                            <span>十三</span>
+                        </td>
+                        <td>
+                            <span>20</span><br />
+                            <span>十四</span>
+                        </td>
+                        <td>
+                            <span>21</span><br />
+                            <span>十五</span>
+                        </td>
+                        <td>
+                            <span>22</span><br />
+                            <span>十六</span>
+                        </td>
+                        <td>
+                            <span>23</span><br />
+                            <span>十七</span>
+                        </td>
+                        <td>
+                            <span>24</span><br />
+                            <span>十八</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>25</span><br />
+                            <span>十九</span>
+                        </td>
+                        <td>
+                            <span>26</span><br />
+                            <span>廿十</span>
+                        </td>
+                        <td>
+                            <span>27</span><br />
+                            <span>廿一</span>
+                        </td>
+                        <td>
+                            <span>28</span><br />
+                            <span>廿二</span>
+                        </td>
+                        <td>
+                            <span>29</span><br />
+                            <span>廿三</span>
+                        </td>
+                        <td>
+                            <span>30</span><br />
+                            <span>廿四</span>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="part7">
+            <div class="part7-head">汽车行业品牌榜</div>
+            <div class="part7-chart">
+                <table>
+                    <tr>
+                        <th>排名</th>
+                        <th>品牌</th>
+                        <th>搜索指数</th>
+                    </tr>
+                    <tr class="part7-selected">
+                        <td>1</td>
+                        <td>大众</td>
+                        <td>
+                            <div class="part7-number">48912001</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-1"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>丰田</td>
+                        <td>
+                            <div class="part7-number">29307333</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-2"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>奥迪</td>
+                        <td>
+                            <div class="part7-number">23139070</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-3"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>本田</td>
+                        <td>
+                            <div class="part7-number">22885564</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-4"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>福特</td>
+                        <td>
+                            <div class="part7-number">22324792</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-5"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>宝马</td>
+                        <td>
+                            <div class="part7-number">21444077</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-6"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>现代</td>
+                        <td>
+                            <div class="part7-number">20114969</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-7"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>起亚</td>
+                        <td>
+                            <div class="part7-number">19251680</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-8"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>奔驰</td>
+                        <td>
+                            <div class="part7-number">19172837</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-9"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>别克</td>
+                        <td>
+                            <div class="part7-number">18544027</div>
+                            <div class="part7-bars">
+                                <div class="color-bar bar-10"></div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
