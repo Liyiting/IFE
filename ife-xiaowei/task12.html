@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>任务十二：学习CSS的新特性</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            -moz-box-sizing:border-box; /* Firefox */
+            -webkit-box-sizing:border-box;
+        }
+        body {
+            background-color: #000;
+        }
+        .container {
+            width: 600px;
+            height: 1000px;
+            padding: 0 50px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        .header {
+            width: 100%;
+            height: 50px;
+            border-bottom: 2px solid #ccc;
+            text-align: center;
+            padding-top: 15px;
+            margin-bottom: 10px;
+        }
+        .part1-table {
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+        .part1-table tr:nth-child(2n+1) {
+            background-color: #cbccd1;
+        }
+        .part1-table tr:first-child {
+            background-color: #000;
+            color: #fff;
+        }
+        .part1-table tr[class^="top"] {
+            color: red;
+        }
+        #box1 {
+            width: 25%;
+            height: 25px;
+            margin: 0 auto;
+            margin-top:40px;
+            border:2px solid #ccc;
+            border-radius: 2px;
+        }
+        #box2 {
+            width: 50%;
+            height: 25px;
+            margin: 0 auto;
+            margin-top: 30px;
+            box-shadow: 0 0 4px 4px #6fafed;
+            border-radius: 2px;
+        }
+        .part3 {
+            height: 200px;
+            width: 100%;
+            margin-top: 30px;
+        }
+        .color-box {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .green-box {
+            height: 100%;
+            width: 100%;
+            background-color: green;
+            position: absolute;
+            left: 0;
+            transition:left 2s;
+            -moz-transition:left 2s; /* Firefox 4 */
+            -webkit-transition:left 2s; /* Safari and Chrome */
+            -o-transition:left 2s; /* Opera */
+        }
+        .green-box:hover {
+            left: 400px;
+        }
+        .blue-box {
+            height: 100%;
+            width: 100%;
+            background-color: blue;
+        }
+        .little-boxs {
+            height: 40px;
+            width: 130px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            color: #fff;
+        }
+        .little-box {
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,.5);
+            display: inline-block;
+            font-size: 20px;
+            text-align: center;
+            padding-top: 10px;
+        }
+        .part4 {
+            margin-top: 50px;
+            font-size: 40px;
+            font-weight: 900;
+        }
+        .part4 h4 {
+            text-shadow:3px 3px 3px purple;
+        }
+        .part5 {
+            height: 200px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        @keyframes myfirst
+        {
+        0%   {background: red; left:0px;transform: rotate(0deg);}
+        25%  {background: yellow; left:100px;transform: rotate(90deg);}
+        50%  {background: green; left:200px;transform: rotate(180deg);}
+        75%  {background: blue;  left:300px;transform: rotate(270deg);}
+        100% {background: purple; left:400px;transform: rotate(360deg);}
+        }
+
+        @-moz-keyframes myfirst /* Firefox */
+        {
+        0%   {background: red; left:0px; -moz-transform: rotate(0deg);}
+        25%  {background: yellow; left:100px; -moz-transform: rotate(90deg);}
+        50%  {background: green; left:200px; -moz-transform: rotate(180deg);}
+        75%  {background: blue; left:300px; -moz-transform: rotate(270deg);}
+        100% {background: purple; left:400px; -moz-transform: rotate(360deg);}
+        }
+
+        @-webkit-keyframes myfirst /* Safari 和 Chrome */
+        {
+        0%   {background: red; left:0px; -webkit-transform: rotate(0deg);}
+        25%  {background: yellow; left:100px; -webkit-transform: rotate(90deg);}
+        50%  {background: green left:200px; -webkit-transform: rotate(180deg);}
+        75%  {background: blue; left:300px; -webkit-transform: rotate(270deg);}
+        100% {background: purple; left:400px; -webkit-transform: rotate(360deg);}
+        }
+
+        @-o-keyframes myfirst /* Opera */
+        {
+        0%   {background: red; left:0px; -o-transform: rotate(0deg);}
+        25%  {background: yellow; left:100px; -o-transform: rotate(90deg);}
+        50%  {background: green; left:200px; -o-transform: rotate(180deg);}
+        75%  {background: blue; left:300px; -o-transform: rotate(270deg);}
+        100% {background: purple; left:400px; -o-transform: rotate(360deg);}
+        }
+        .part5-box {
+            height: 100px;
+            width: 120px;
+            margin-top: 20px;
+            background-color: #ff0000;
+            border-radius: 20px;
+            position: relative;
+        }
+        .part5-box:hover {
+            animation:myfirst 2s;
+            /* Firefox: */
+            -moz-animation:myfirst 2s;
+            /* Safari 和 Chrome: */
+            -webkit-animation: myfirst 2s;
+            /* Opera: */
+            -o-animation:myfirst 2s;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header"><h3>CSS3新特性</h3></div>
+    <div class="part1">
+        <h4>1.选择器</h4>
+        <a href="https://www.cnblogs.com/jiasm/p/4648967.html">【参考链接1】</a>
+        <a href="http://www.w3school.com.cn/cssref/css_selectors.asp">【参考链接2】</a>
+        <table class="part1-table">
+            <tr>
+                <th>排名</th>
+                <th>网站</th>
+                <th>热度</th>
+            </tr>
+            <tr class="top1">
+                <td>1.</td>
+                <td>百度前端技术学院</td>
+                <td>13000</td>
+            </tr>
+            <tr class="top2">
+                <td>2.</td>
+                <td>百度前端技术学院</td>
+                <td>12000</td>
+            </tr>
+            <tr class="top3">
+                <td>3.</td>
+                <td>百度前端技术学院</td>
+                <td>11000</td>
+            </tr>
+            <tr>
+                <td>4.</td>
+                <td>百度前端技术学院</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <td>5.</td>
+                <td>百度前端技术学院</td>
+                <td>9000</td>
+            </tr>
+            <tr>
+                <td>6.</td>
+                <td>百度前端技术学院</td>
+                <td>8000</td>
+            </tr>
+            <tr>
+                <td>7.</td>
+                <td>百度前端技术学院</td>
+                <td>7000</td>
+            </tr>
+            <tr>
+                <td>8.</td>
+                <td>百度前端技术学院</td>
+                <td>6000</td>
+            </tr>
+            <tr>
+                <td>9.</td>
+                <td>百度前端技术学院</td>
+                <td>5000</td>
+            </tr>
+            <tr>
+                <td>10.</td>
+                <td>百度前端技术学院</td>
+                <td>4000</td>
+            </tr>
+        </table>
+    </div>
+    <div class="part2">
+        <h4>2.边框</h4>
+        <a href="http://blog.csdn.net/yk19921114/article/details/51615954">【参考链接】</a>
+        <div id="box1"></div>
+        <div id="box2"></div>
+    </div>
+    <div class="part3">
+        <h4>3.过渡(transition)</h4>
+        <div class="color-box">
+            <div class="green-box"></div>
+            <div class="blue-box"></div>
+            <div class="little-boxs">
+                <div class="little-box">1</div>
+                <div class="little-box">2</div>
+                <div class="little-box">3</div>
+            </div>
+        </div>
+    </div>
+    <div class="part4">
+        <h4>4.文本阴影效果</h4>
+    </div>
+    <div class="part5">
+        <h4>5.动画</h4>
+        <div class="part5-box"></div>
+    </div>
+</div>
+</body>
+</html>
