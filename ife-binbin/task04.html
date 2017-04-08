@@ -15,6 +15,9 @@
       padding-top: 100px;
       margin: 0 auto;
     }
+    .content {
+      margin-bottom: 5px;
+    }
     #left-out {
       margin-left: 20px;
     }
@@ -26,13 +29,14 @@
       color: #fff;
       text-align: center;
       padding: 5px;
-      background-color: red;
+      background-color: rgba(255,0,0,0.5);
       margin-left: 5px;
       margin-top: 5px;
     }
   </style>
 <body>
   <div class="container">
+    <div class="content">请输入一个数字：</div>
     <input type="text" id="input"></input>
     <button id="left-in">左侧入</button>
     <button id="right-in">右侧入</button>
@@ -57,19 +61,31 @@
 
   //左侧入按钮
   document.getElementById('left-in').onclick = function(){
-    var div = document.createElement('div');
-    div.innerHTML = input.value;
-    div.className = 'red-block';
-    box.insertBefore(div,box.children[0]);
-    init();
+    if(input.value==''){
+      alert('输入为空，请重新输入。')
+    } else if(isNaN(input.value) || input.value.indexOf(' ')>=0 ){
+      alert('请输入纯数字(不包含空格)');
+    } else {
+      var div = document.createElement('div');
+      div.innerHTML = input.value;
+      div.className = 'red-block';
+      box.insertBefore(div,box.children[0]);
+      init();
+    }
   }
   //右侧人按钮
   document.getElementById('right-in').onclick = function(){
-    var div = document.createElement('div');
-    div.innerHTML = input.value;
-    div.className = 'red-block';
-    box.appendChild(div);
-    init();
+    if(input.value==''){
+      alert('输入为空，请重新输入。')
+    } else if(isNaN(input.value) || input.value.indexOf(' ')>=0 ){
+      alert('请输入数字');
+    } else {
+      var div = document.createElement('div');
+      div.innerHTML = input.value;
+      div.className = 'red-block';
+      box.appendChild(div);
+      init();
+    }
   }
   //左侧出按钮
   document.getElementById('left-out').onclick = function(){
