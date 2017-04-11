@@ -21,11 +21,16 @@
     #left-out {
       margin-left: 20px;
     }
+    #random {
+      margin-left: 20px;
+    }
     #box-container {
-      width: 100%;
+      width: 1024px;
       height: 220px;
       display: flex;
       align-items:flex-end;
+      border: 1px solid #000;
+      margin-top: 5px;
     }
     .red-block {
       width: 15px;
@@ -38,9 +43,8 @@
       margin-left: 2px;
       padding-bottom: 0;
     }
-    #sorting {
+    #bubble-sort {
       margin-top: 5px;
-
     }
   </style>
 <body>
@@ -51,21 +55,14 @@
     <button id="right-in">右侧入</button>
     <button id="left-out">左侧出</button>
     <button id="right-out">右侧出</button>
+    <button id="random">随机生成一组数据</button>
+    <button id="clear">清除</button>
     <div id="box-container">
-      <span class="red-block">30</span>
-      <span class="red-block">12</span>
-      <span class="red-block">11</span>
-      <span class="red-block">100</span>
-      <span class="red-block">39</span>
-      <span class="red-block">36</span>
-      <span class="red-block">13</span>
-      <span class="red-block">19</span>
-      <span class="red-block">64</span>
-      <span class="red-block">92</span>
-      <span class="red-block">81</span>
-      <span class="red-block">60</span>
+
     </div>
     <button id="bubble-sort">冒泡排序</button>
+    <button id="selection-sort">选择排序</button>
+    <button id="insertion-sort">插入排序</button>
   </div>
 <script type="text/javascript">
 
@@ -76,6 +73,14 @@
   var box = document.getElementById('box-container');
   //队列元素个数
   var num = box.children.length;
+
+  function getArray(){//存队列的innerHTML
+    var array = [];
+    for(var i=0; i<num;i++){
+      array.push(parseInt(box.children[i].innerHTML));
+    }
+    return array;
+  }
   //左侧入按钮
   document.getElementById('left-in').onclick = function(){
     if(input.value==''){
@@ -128,21 +133,63 @@
     num--;
     alert(node.innerHTML);
   }
-  //点击按钮 冒泡排序
-  document.getElementById('bubble-sort').onclick = function (){
-    var lis = box.children;
-    var arr = [];
-    for(var i=0; i< lis.length;i++){
-      arr.push(parseInt(lis[i].innerHTML));
+
+  //随机生成数组
+  document.getElementById('random').onclick = function (){
+    clear();
+    var arr =[];
+    for(let i=10;i<=100;i++){
+      arr.push(i);
     }
-    sort(arr);
-    timer = setInterval(render,500);
+    arr.sort(function(a,b){
+      return Math.random()-0.5;
+    })
+    var array = arr.slice(0,60);
+    num=60;
+
+    for(let i=0;i<num;i++){
+      var span = document.createElement('span');
+      span.innerHTML = array[i];
+      span.className = 'red-block';
+      box.appendChild(span);
+    }
+    init();
+  }
+  //清除所有box内数据
+  document.getElementById('clear').onclick = clear;
+  function clear(){
+    while(box.hasChildNodes()){
+      box.removeChild(box.firstChild);
+    }
+  }
+  //冒泡排序按钮
+  document.getElementById('bubble-sort').onclick = function (){
+    count1 = 0;
+    count2 = 0;
+    bubbleSort();
+    timer = setInterval(render,10);
+  }
+  //选择排序按钮
+  document.getElementById('selection-sort').onclick = function(){
+    count1 = 0;
+    count2 = 0;
+    selectionSort();
+    timer = setInterval(render,200);
+  }
+  //插入排序按钮
+  document.getElementById('insertion-sort').onclick = function(){
+    count1 = 0;
+    count2 = 0;
+    insertionSort();
+    timer = setInterval(render,200);
   }
 
   var state = [];//存放每次比较结果
-  var count1 = 0;//冒泡计数器，存放比较次数
-  function sort(arr){
-    for(var outer=arr.length;outer>=2;--outer){
+  var count1=0;//冒泡计数器，存放比较次数
+  // 冒泡排序
+  function bubbleSort(){
+    var arr=getArray();
+    for(var outer=num;outer>=2;--outer){
       for(var inner=0;inner<=outer-1;++inner){
         if(arr[inner]>arr[inner+1]) {
           swap(arr,inner,inner+1);
@@ -152,13 +199,49 @@
       }
     }
   }
+  // 选择排序
+  function selectionSort(){
+    var arr = getArray();
+    var min;
+    for(var outer = 0; outer<num-1; ++outer){
+      min=outer;
+      for (var inner = outer+1; inner<=num-1; ++inner) {
+        if(arr[inner]<arr[min]){
+          min = inner;
+        }
+      }
+      swap(arr,outer,min);
+      count1++;
+      state.push(arr.slice(0));
+    }
+  }
+  //插入排序
+  function insertionSort(){
+    var arr = getArray();
+    var temp, inner;
+    for(var outer=1;outer<=arr.length-1;++outer){
+      temp = arr[outer];
+      inner = outer;
+      while(inner>0 && (arr[inner-1]>=temp)){
+        arr[inner] = arr[inner-1];
+        --inner;
+      }
+      arr[inner] = temp;
+      count1++;
+      state.push(arr.slice(0));
+    }
+  }
+
 
   var count2=0;//渲染计数器
   function render(){
-    var lis = box.children;
+    if (state.length==0) {
+      clearInterval(timer);
+      return;
+    }
     var s = state.shift() || [];
-    for(var i=0;i<lis.length;i++){
-      lis[i].innerHTML = s[i];
+    for(var i=0;i<num;i++){
+      box.children[i].innerHTML = s[i];
     }
     init();
     count2++;
@@ -166,7 +249,6 @@
       clearInterval(timer);
     }
   }
-
 
   function swap(arr,a,b){
     var temp = arr[a];
@@ -176,7 +258,7 @@
   }
   //点击任意元素则删除该元素
   function init(){
-    for(var i=0;i<box.children.length;i++){
+    for(var i=0;i<num;i++){
       box.children[i].style.height = box.children[i].innerHTML*2+'px';
       box.children[i].onclick = function(){
         box.removeChild(this);
