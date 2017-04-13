@@ -1,0 +1,178 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 07 binary tree</title>
+  </head>
+  <style>
+    body {
+      color: #000;
+    }
+    #container {
+      height: 260px;
+      width: 400px;
+      background-color: #fff;
+      border: 2px solid #000;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      align-content: space-around;
+      margin: 0 auto;
+    }
+    .buttons {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .box1 {
+      height: 40%;
+      width: 90%;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    .box2 {
+      height: 60%;
+      width: 40%;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  </style>
+<body>
+  <div id="container">
+    <div class="box1">
+      <div class="box2">
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+      </div>
+      <div class="box2">
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="box1">
+      <div class="box2">
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+      </div>
+      <div class="box2">
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+        <div class="box2">
+          <div class="box2"></div>
+          <div class="box2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <button id="btn-preorder">前序遍历</button>
+    <button id="btn-inorder">中序遍历</button>
+    <button id="btn-postorder">后序遍历</button>
+  </div>
+<script type="text/javascript">
+(function() {
+  var container = document.getElementById('container');
+  var preBtn = document.getElementById('btn-preorder');
+  var inBtn = document.getElementById('btn-inorder');
+  var postBtn = document.getElementById('btn-postorder');
+  var arr=[];
+  var last;
+  var toggle = false;
+
+  preBtn.onclick = function(){
+    if(!toggle){
+      toggle = true;
+      reset();
+      preOrder(container);
+      show();
+    }
+  }
+  inBtn.onclick = function(){
+    if(!toggle){
+      toggle = true;
+      reset();
+      inOrder(container);
+      show();
+    }
+  }
+  postBtn.onclick = function(){
+    if(!toggle){
+      toggle = true;
+      reset();
+      postOrder(container);
+      show();
+    }
+  }
+
+  function preOrder(node){
+    if(node){
+      arr.push(node);
+      preOrder(node.children[0]);
+      preOrder(node.children[1]);
+    }
+  }
+  function inOrder(node){
+    if(node){
+      inOrder(node.children[0]);
+      arr.push(node);
+      inOrder(node.children[1]);
+    }
+  }
+  function postOrder(node){
+    if(node){
+      postOrder(node.children[0]);
+      postOrder(node.children[1]);
+      arr.push(node);
+    }
+  }
+
+  function show(){
+    for(let i=0;i<arr.length;i++){
+      setTimeout(function(i){
+        return function(){
+          if(i==arr.length-1){
+            toggle = false;
+          }
+          if (last) {
+            last.style.backgroundColor = "white";
+          }
+          arr[i].style.backgroundColor = "blue";
+          last = arr[i];
+        }
+      }(i),i*100)
+    }
+  }
+  function reset(){
+    arr = [];
+    if(last){
+      last.style.backgroundColor = "white";
+    }
+  }
+})();
+</script>
+</body>
+</html>
