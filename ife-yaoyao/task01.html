@@ -1,0 +1,100 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE Yaoyao Task 01</title>
+  </head>
+  <style>
+    body {
+      color: #000;
+    }
+    .container {
+      height: 400px;
+      width: 600px;
+      margin: 0 auto;
+      display: flex;
+      justify-content:center;
+      align-items: center;
+    }
+    .check-box {
+      position: relative;
+    }
+    span {
+      font-weight: bolder;
+      margin-right: 20px;
+    }
+    input {
+      border:none;
+      height: 30px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    #hint {
+      position: absolute;
+      left: 54px;
+      top: 35px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    button {
+      height: 30px;
+      width: 60px;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size:18px;
+      font-weight: border;
+      background-color: rgb(52,122,183);
+      border: 1px solid rgb(41,105,162);
+      vertical-align: middle;
+    }
+  </style>
+<body>
+  <div class="container">
+    <div class="check-box">
+      <span>名称</span>
+      <input type = "text" id="name"></input>
+      <button id="btn">验证</button>
+      <div id="hint">必填，长度为4~16个字符</div>
+    </div>
+  </div>
+<script type="text/javascript">
+  var btn = document.getElementById('btn');
+  var input = document.getElementById('name');
+  var hint = document.getElementById('hint');
+
+  btn.onclick = function (){
+    let len =getLength(input.value);
+    if (len == "") {
+      input.style.border = "1px solid red";
+      hint.style.color = "red";
+      hint.innerHTML = "姓名不能为空";
+    } else if(len>16){
+      input.style.border = "1px solid red";
+      hint.style.color = "red";
+      hint.innerHTML = "姓名过长";
+    } else if(len<4){
+      input.style.border = "1px solid red";
+      hint.style.color = "red";
+      hint.innerHTML = "姓名过短";
+    } else {
+      input.style.border = "1px solid rgb(100,183,71)";
+      hint.style.color = "rgb(100,183,71)";
+      hint.innerHTML = "名称格式正确";
+    }
+  }
+  function getLength(str) {
+    var arr = str.split("");
+    var len = 0;
+    var reg=/^[\u2E80-\u9FFF]+$/;
+    for(let i=0;i<arr.length;i++){
+      if(reg.test(arr[i])){len+=2;}
+      else len+=1;
+    }
+    return len;
+  }
+</script>
+</body>
+</html>
